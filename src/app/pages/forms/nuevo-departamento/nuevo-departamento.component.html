@@ -1,0 +1,15 @@
+<dialog-component [title]="title" (closeEmit)="closeModal()" [alertMessage]="alertMessage">
+  <form [formGroup]="departamentoForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="depto">Departamento</label>
+      <input type="text" class="form-control" id="depto" nombre="departamento" [(ngModel)]="departamento.departamento"
+        formControlName="departamento" [ngClass]="{ 'is-invalid': submitted && f.departamento.errors }">
+      <div *ngIf="submitted && f.departamento.errors" class="invalid-feedback">
+        <div *ngIf="f.departamento.errors.required">Departamento es requerido</div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-secondary">{{btnText}}</button>
+    </div>
+  </form>
+</dialog-component>

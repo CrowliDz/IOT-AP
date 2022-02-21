@@ -1,0 +1,11 @@
+<div style="display: block;">
+<label>Filtrar por:</label>
+<div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic example" id="tipoFiltro">
+  <button type="button" class="btn btn-outline-info" [ngClass]="{'btn-info': filterBy==1 }"
+    (click)="filterTypeselected(1)">Equipo</button>
+  <button type="button" class="btn btn-outline-info" [ngClass]="{'btn-info': filterBy==2 }"
+    (click)="filterTypeselected(2)">Área</button>
+    <button type="button" style="font-size: 12px;" class="btn btn-outline-info" [ngClass]="{'btn-info': filterBy ==3 }"
+    (click)="filterTypeselected(3)">Tipo de Equipo</button>
+</div>
+</div>

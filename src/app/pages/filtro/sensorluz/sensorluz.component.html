@@ -1,0 +1,12 @@
+<div class="moduloI card mb-5 mx-5">
+    <div class="row">
+        <div *ngFor="let luz of lista">
+            <button [ngStyle]="{'background-color': (luz.estado_luz == 0) ? 'red' : '#00ff00'}"
+            (click)="toggleColor(luz)" mat-fab> <i class="material-icons fa fa-lightbulb-o"></i>
+                </button>
+            <p class="nombre_luz"> {{ luz.nombre_luz }} </p>
+        </div>
+    </div>
+
+    <div id="chartdiv"></div>
+</div>

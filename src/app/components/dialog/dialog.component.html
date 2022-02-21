@@ -1,0 +1,13 @@
+<div class="style-modal">
+    <div class="header">
+        <h5>{{title}}</h5>
+        <h2> <i class="material-icons pointer" (click)="closeModal()"> clear </i> </h2>
+    </div>
+    <div class="body">
+        <ng-content></ng-content>
+        <div class="alert animated fadeIn" *ngIf="alertMessage"
+            [ngClass]="{'alert-danger': !alertSuccess, 'alert-success': alertSuccess }">
+            {{ alertMessage }}
+        </div>
+    </div>
+</div>

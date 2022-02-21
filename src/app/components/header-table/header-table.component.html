@@ -1,0 +1,34 @@
+<div class="header d-flex justify-content-between">
+  <div class="d-flex justify-content-start">
+    <ul class="nav">
+      <li class="nav-item" *ngFor="let li of listNav">
+        <a class="nav-link active" [routerLink]="[li.router]" [routerLinkActive]="['activate']">{{li.name}}</a>
+      </li>
+      <li *ngIf="funcionButton">
+        <a class="nav-link active">Catálogo de Funciones</a>
+      </li>
+      <li>
+        <a class="button-s" (click)="onClickStatuswosub()" *ngIf="statuswosubButton"> <b>Catálogo de status de fabricación</b></a>
+      </li>
+    </ul>
+    
+  </div>
+  <div class="d-flex justify-content-end" >
+    <!-- <div class="mr-3">
+        <a class="button-func" (click)="onClickFunciones()" *ngIf="funcionButton"> <b>Funciones</b></a>
+    </div> -->
+    <div class="form-group has-search mr-1" *ngIf="search">
+      <span class="material-icons form-control-feedback">
+        search
+      </span>
+      <input type="text" class="form-control search-input" placeholder="{{titleSelect}}"
+        (input)="onSearchChange($event.target.value)">
+    </div>
+    <!-- <a class="btn" data-toggle="tooltip" data-placement="top" title="Nuevo"
+   (click)="onClickButon()">
+    <i class="material-icons"> add </i></a>-->
+    <button mat-mini-fab class="ml-1 button-add" (click)="onClickButon()" *ngIf="renderButton">
+      <i class="material-icons"> add </i>
+    </button>
+  </div>
+</div>

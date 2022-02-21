@@ -1,0 +1,11 @@
+<div class="dropdown" [ngClass]="{'dropleft': isDropleft}">
+  <button class="btn btn-custom dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    {{ optionSelected.value }}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" *ngFor="let option of optionList" (click)="selectOption(option)" [ngClass]="{'active': optionSelected.value === option.value }" >
+      {{ option.label }}
+    </a>
+  </div>
+</div>

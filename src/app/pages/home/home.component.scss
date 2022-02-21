@@ -1,0 +1,192 @@
+@import '../../../assets/variables.scss';
+
+.card-shadow {
+  //box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+
+.row-empresa {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  width: 100%;
+  flex-wrap: wrap;
+
+  .logo-empresa {
+    flex: 1;
+    min-width: 235px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  .info-empresa {
+    flex: 2;
+    min-width: 468px;
+
+    .info-texto {
+      white-space: pre-line;
+      text-align: start !important;
+      margin-top: 0;
+      margin-bottom: 1rem !important;
+      font-weight: 700 !important;
+    }
+  }
+}
+
+@media(max-width: 700px) {
+  .row-empresa {
+    .logo-empresa {
+      min-width: 235px;
+    }
+
+    .info-empresa {
+      min-width: 235px;
+    }
+  }
+}
+
+@media(max-width: 460px) {
+  .row-empresa {
+    .logo-empresa {
+      min-width: 142px;
+    }
+
+    .info-empresa {
+      min-width: 142px;
+    }
+  }
+}
+
+.home {
+  margin-top: 4rem;
+}
+
+.section-cards {
+  .row {
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+.card-grafica {
+  background-color: #1F6597;
+  cursor: default;
+  border-radius: .5rem;
+  padding: 0.55rem;
+
+  .card-body {
+    padding: 0.25rem;
+  }
+}
+
+div.card-grafica:hover {
+  opacity: 0.5;
+}
+
+.material-icons {
+  font-size: 48px;
+}
+
+.card-body-custom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 25px 0px 25px 0px
+}
+
+.card-empresa {
+  width: 100%;
+  margin: 2rem 3rem 1rem 3rem;
+}
+
+.cards-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: #2e91d0;
+  color: white;
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+  max-width: 8rem;
+  min-width: 8rem;
+  width: 9rem;
+  height: 7rem;
+  margin: 1rem;
+  text-align: center;
+}
+
+.item-container:hover {
+  opacity: 0.8;
+  transform: scale(1.1, 1.1)
+}
+
+.Empresa {
+  background-color: $blue;
+  pointer-events: none;
+}
+
+
+.blue-bg {
+  background-color: $blue;
+}
+
+.pink-bg {
+  background-color: $pink;
+}
+
+.red-bg {
+  background-color: $red;
+}
+
+.black-bg {
+  background-color: $black;
+}
+
+.green-bg {
+  background-color: $green;
+}
+
+.yellow-bg {
+  background-color: $yellow;
+}
+
+.orange-bg {
+  background-color: $orange;
+}
+
+.green-two-bg {
+  background-color: $green-two;
+}
+
+.gray-bg {
+  background-color: $gray;
+}
+
+.yellow-bg {
+  background-color: #ebc139;
+}
+
+.red-low-bg {
+  background-color: #FF4180;
+}
+
+.be-bg {
+  background-color: #5e1224;
+}
+.be-green {
+  background-color: #58a924;
+}

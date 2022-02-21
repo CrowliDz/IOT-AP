@@ -1,0 +1,25 @@
+@import '../../../../assets/variables.scss';
+@import 'material-icons/iconfont/material-icons.css';
+
+.card {
+  box-shadow: $shadow-card;
+}
+
+.moduloI {
+  margin-top: 3rem;
+}
+
+.footer {
+  text-align: center;
+}
+
+.c {
+  margin-left: 4px;
+  margin-right: 4px;
+  //width: 45%
+}
+
+.btn-add {
+  padding: .0rem .75rem;
+  vertical-align: bottom;
+}

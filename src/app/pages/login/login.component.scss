@@ -1,0 +1,73 @@
+.sing-form {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../../assets/img/IOT.jpg");
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
+
+  .alert {
+    margin-top: 1rem;
+  }
+
+  .form-container {
+    // border: 1px solid green;
+    height: 20rem;
+    width: 25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem;
+
+    .form-style {
+      //border: 2px solid black;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      border-radius: 10px;
+      background-color: #fff;
+      // background: #00000052;
+
+      .form {
+        .btn-custom {
+          background-color: #4E8689;
+          border-color: #4E8689;
+        }
+
+        .form-row-custom {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 2rem;
+        }
+      }
+
+      .login-text {
+        color: black;
+        margin: 1rem;
+      }
+
+      .change-form-style {
+        margin: 1rem;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+          color: #4E8689;
+        }
+      }
+    }
+  }
+}

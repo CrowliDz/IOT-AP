@@ -1,0 +1,136 @@
+<div class="mt-3">
+    <app-header-table [renderButton]="false" [titleHeader]="'Modulo Interfaz'" [titleSelect]="'Buscar Producto..'"
+        (buttonOutput)="add()" (searchOutput)="onSearchChange($event)" [listNav]="listNav">
+    </app-header-table>
+</div>
+<div class="moduloI card mb-4 mx-5">
+    <div class="table-responsive-lg px-4">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:10%">SKU</th>
+                        <th scope="col" style="width:15%">Descripción producto</th>
+                        <th scope="col" style="width:10%">Tiempo de fabricación (segundos)</th>
+                        <th scope="col" style="width:10%">Unidad de medida
+                            <a class="btn-add btn" data-toggle="tooltip" data-placement="top" title="Agregar "
+                                (click)="newUm()"><i class="btn-add material-icons">add_circle</i></a>
+                        </th>
+                        <th scope="col" style="width:20%">Empresa</th>
+                        <th scope="col" style="width:5%">Intervalo</th>
+                        <th scope="col" style="width:5%">Ciclo por producto</th>
+                        <th scope="col"  style="width:25%">
+                            <a (click)="newDefecto()" class="btn btn-primary c">Modos de falla</a>
+                            <a (click)="newScrap()" class="btn btn-primary c">Scrap</a>
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th scope="col">
+                            <div class=" ">
+                                <input type="text" class="form-control" id="producto" nombre="producto"
+                                    formControlName="producto"
+                                    [ngClass]="{ 'is-invalid': submitted && f.producto.errors }">
+                                <div *ngIf="submitted && f.producto.errors" class="invalid-feedback">
+                                    <div *ngIf="f.producto.errors.required">Producto es requerido</div>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class=" ">
+                                <input type="text" class="form-control" id="desc_producto" nombre="desc_producto"
+                                    formControlName="desc_producto"
+                                    [ngClass]="{ 'is-invalid': submitted && f.desc_producto.errors }">
+                                <div *ngIf="submitted && f.desc_producto.errors" class="invalid-feedback">
+                                    <div *ngIf="f.desc_producto.errors.required">Descripción es requerido</div>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="">
+                                <input type="number" class="form-control" id="te_producto" nombre="te_producto"
+                                    formControlName="te_producto"
+                                    [ngClass]="{ 'is-invalid': submitted && f.te_producto.errors }">
+                                <div *ngIf="submitted && f.te_producto.errors" class="invalid-feedback">
+                                    <div *ngIf="f.te_producto.errors.required">Tiempo es requerido</div>
+                                    <!--<div *ngIf="f.te_producto.errors.pattern">Tiempo es menor a cero</div>-->
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="">
+                                <select class="form-control" id="um_producto" nombre="um_producto"
+                                    formControlName="um_producto"
+                                    [ngClass]="{ 'is-invalid': submitted && f.um_producto.errors }">
+                                    <option *ngFor="let um of listaUm" [value]="um.idum">{{um.um|titlecase}}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && f.um_producto.errors" class="invalid-feedback">
+                                    <div *ngIf="f.um_producto.errors.required">Um es requerido</div>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <select class="form-control" id="idempresa" nombre="idempresa" formControlName="idempresa"
+                                [ngClass]="{ 'is-invalid': submitted && f.idempresa.errors }">
+                                <option *ngFor="let empresa of listaEmpresa" [value]="empresa.idempresa">
+                                    {{empresa.nomemp | titlecase}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.idempresa.errors" class="invalid-feedback">
+                                <div *ngIf="f.idempresa.errors.required">Empresa es requerido</div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="">
+                                <input type="number" class="form-control" id="intervalo_tm" nombre="intervalo_tm"
+                                    formControlName="intervalo_tm"
+                                    [ngClass]="{ 'is-invalid': submitted && f.intervalo_tm.errors }">
+                                <div *ngIf="submitted && f.intervalo_tm.errors" class="invalid-feedback">
+                                    <div *ngIf="f.intervalo_tm.errors.required">Tiempo es requerido</div>
+                                    <!--  <div *ngIf="f.intervalo_tm.errors.pattern">Tiempo es mayor a cero</div>-->
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="">
+                                <input type="number" class="form-control" id="ciclo_producto" nombre="ciclo_producto"
+                                    formControlName="ciclo_producto"
+                                    [ngClass]="{ 'is-invalid': submitted && f.intervalo_tm.errors }">
+                                <div *ngIf="submitted && f.ciclo_producto.errors" class="invalid-feedback">
+                                    <div *ngIf="f.ciclo_producto.errors.required">Ciclo por producto es requerido</div>
+                                    <!--  <div *ngIf="f.intervalo_tm.errors.pattern">Tiempo es mayor a cero</div>-->
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of listaProductos">
+                        <td>{{p.producto }}</td>
+                        <td>{{p.desc_producto }}</td>
+                        <td>{{p.te_producto }} </td>
+                        <td>{{p.Um.um | titlecase}}</td>
+                        <td>{{p.Empresa.nomemp }}</td>
+                        <td>{{p.intervalo_tm}}</td>
+                        <td>{{p.ciclo_producto}}</td>
+                        <td>
+                            <a class="btn" data-toggle="tooltip" data-placement="top" title="Editar"
+                                (click)="update(p)"><i class="material-icons">create</i></a>
+                            <a class="btn" data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                (click)="VerificaProd(p)"><i class="material-icons">delete</i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="footer">
+        <span class="badge badge-light">Total:{{total}} </span>
+    </div>
+</div>

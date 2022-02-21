@@ -1,0 +1,9 @@
+<div class="card mb-3"  [ngClass]="{'border': styleClass }">
+    <div class="card-body">
+      <div *ngIf="!styleClass">
+        <p><b>{{title}} </b></p>
+        <hr>
+      </div>
+      <ng-content></ng-content>
+    </div>
+  </div>

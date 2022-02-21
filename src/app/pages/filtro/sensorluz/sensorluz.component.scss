@@ -1,0 +1,104 @@
+@import '../../../../assets/variables.scss';
+@import 'material-icons/iconfont/material-icons.css';
+
+.card {
+  box-shadow: $shadow-card;
+}
+
+.moduloI {
+  margin-top: 5rem;
+}
+
+.footer {
+  text-align: center;
+}
+
+.c {
+  margin-left: 4px;
+  margin-right: 4px;
+  //width: 45%
+}
+
+.btn-add {
+  padding: .0rem .75rem;
+  vertical-align: bottom;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+
+.example-button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.section {
+  .row {
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+.nombre_luz{
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem;
+    flex-direction: column;
+    cursor: pointer;
+    background-color: #22384f;
+    color: white;
+    border-radius: 0rem 0rem 0.5rem 0.5rem;
+    max-width: 8rem;
+    min-width: 8rem;
+    width: 9rem;
+    height: 2rem;
+    margin: 0rem 1rem 1rem 1rem;
+    text-align: center;
+}
+
+.item-container{
+  box-shadow: 1px 2px 2px 0px rgb(0 0 0 / 50%);
+}
+
+.row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.material-icons {
+  font-size: 48px;
+}
+
+.mat-fab{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: #2e91d0;
+  color: white;
+  border-radius: 0.5rem 0.5rem 0rem 0rem ;
+  max-width: 8rem;
+  min-width: 8rem;
+  width: 9rem;
+  height: 7rem;
+  margin: 1rem 1rem 0rem 1rem;
+  text-align: center;
+}
+
+.test {
+  background-color: red;
+}

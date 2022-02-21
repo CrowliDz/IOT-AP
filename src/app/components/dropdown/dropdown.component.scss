@@ -1,0 +1,10 @@
+@import '../.././../assets/variables.scss';
+.active {
+    background-color:  $indigo;
+    color: white !important;
+}
+
+.btn-custom{
+    background-color: #d8d9db08;
+    color: #495057 !important;
+}

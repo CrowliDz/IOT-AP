@@ -1,0 +1,27 @@
+
+<div class="table-responsive px-4">
+<table class="table table-hover px-4">
+  <thead>
+    <tr>
+      <th scope="col">Fecha Inicio Evento</th>
+      <th scope="col">Fecha Fin Evento</th>
+      <th scope="col">Duración</th>
+      <th scope="col">Fecha Inicio Paro</th>
+      <th scope="col">Fecha Fin Paro</th>
+      <th scope="col">Duración Paro</th>
+      <th scope="col">Atiende</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let evento of eventos">
+      <td>{{evento.hri |date:'medium':'UTC'}}</td>
+      <td>{{evento.hrf |date:'medium':'UTC'}}</td>
+      <td>{{evento.tiempoe}}</td>
+      <td>{{evento.paroi |date:'medium':'UTC'}}</td>
+      <td>{{evento.parof |date:'medium':'UTC'}}</td>
+      <td>{{evento.tiempop}}</td>
+      <td>{{evento.desbloqueo | uppercase }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

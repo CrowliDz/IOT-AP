@@ -1,0 +1,98 @@
+<div class="nuevo-cia card h-100 d-flex mx-5">
+  <div class="card-body">
+    <h3>Editar empresa</h3>
+    <hr>
+    <form [formGroup]="ciaForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="nombre" nombre="nombre" [(ngModel)]="cia.nombre"
+            formControlName="nombre" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }">
+          <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+            <div *ngIf="f.nombre.errors.required">Nombre es requerida</div>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="razon">Razón</label>
+          <input type="text" class="form-control" id="razon" nombre="razon" [(ngModel)]="cia.razon"
+            formControlName="razon" [ngClass]="{ 'is-invalid': submitted && f.razon.errors }">
+          <div *ngIf="submitted && f.razon.errors" class="invalid-feedback">
+            <div *ngIf="f.razon.errors.required">Razón es requerida</div>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="rfc">RFC</label>
+          <input type="text" class="form-control" id="rfc" nombre="rfc" [(ngModel)]="cia.rfc" formControlName="rfc"
+            [ngClass]="{ 'is-invalid': submitted && f.rfc.errors }">
+          <div *ngIf="submitted && f.rfc.errors" class="invalid-feedback">
+            <div *ngIf="f.rfc.errors.required">Rfc es requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="calle">Calle</label>
+          <input type="text" class="form-control" id="calle" nombre="calle" [(ngModel)]="cia.calle"
+            formControlName="calle" [ngClass]="{ 'is-invalid': submitted && f.calle.errors }">
+          <div *ngIf="submitted && f.calle.errors" class="invalid-feedback">
+            <div *ngIf="f.calle.errors.required">Calle es requerida</div>
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="numero">Número</label>
+          <input type="text" class="form-control" id="numero" nombre="numero" [(ngModel)]="cia.numero"
+            formControlName="numero" [ngClass]="{ 'is-invalid': submitted && f.numero.errors }">
+          <div *ngIf="submitted && f.numero.errors" class="invalid-feedback">
+            <div *ngIf="f.numero.errors.required">Número es requerida</div>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="colonia">Colonia</label>
+          <input type="text" class="form-control" id="colonia" nombre="colonia" [(ngModel)]="cia.colonia"
+            formControlName="colonia" [ngClass]="{ 'is-invalid': submitted && f.colonia.errors }">
+          <div *ngIf="submitted && f.colonia.errors" class="invalid-feedback">
+            <div *ngIf="f.colonia.errors.required">Colonia es requerida</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="ciudad">Ciudad</label>
+          <input type="text" class="form-control" id="ciudad" nombre="ciudad" [(ngModel)]="cia.ciudad"
+            formControlName="ciudad" [ngClass]="{ 'is-invalid': submitted && f.ciudad.errors }">
+          <div *ngIf="submitted && f.ciudad.errors" class="invalid-feedback">
+            <div *ngIf="f.ciudad.errors.required">Ciudad es requerida</div>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="pais">País</label>
+          <input type="text" class="form-control" id="pais" nombre="pais" [(ngModel)]="cia.pais" formControlName="pais"
+            [ngClass]="{ 'is-invalid': submitted && f.pais.errors }">
+          <div *ngIf="submitted && f.pais.errors" class="invalid-feedback">
+            <div *ngIf="f.pais.errors.required">País es requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="cp">CP</label>
+          <input type="text" class="form-control" id="cp" nombre="cp" [(ngModel)]="cia.cp" formControlName="cp"
+            [ngClass]="{ 'is-invalid': submitted && f.cp.errors }">
+          <div *ngIf="submitted && f.cp.errors" class="invalid-feedback">
+            <div *ngIf="f.cp.errors.required">CP es requerido</div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Imagen</label>
+          <div class="skn-novel-edition-presentation-image">
+            <img style="max-width: 100px;" src={{this.imgURL}}>
+            <input #file type="file" accept='image/png, image/jpg, image/jpeg' (change)="fileChangeEvent($event)"
+              hidden>
+            <button type="button" mat-raised-button color="primary" class="skn-upload-image-button"
+              (click)="file.click()">Subir imagen</button>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="eslogan">Slogan</label>
+          <input type="text" class="form-control" id="eslogan" [(ngModel)]="cia.eslogan" formControlName="eslogan"
+            nombre="eslogan">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-secondary">Guardar</button>
+    </form>
+  </div>
+</div>

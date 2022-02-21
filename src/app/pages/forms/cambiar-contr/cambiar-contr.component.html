@@ -1,0 +1,28 @@
+<dialog-component [title]="title" (closeEmit)="closeModal()" [alertMessage]="alertMessage">
+  <form [formGroup]="CambiaContrForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+
+
+      <div>
+        <label for="password">Contraseña</label>
+        <input type="password" class="form-control" id="password" nombre="password" formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Contraseña es requerida</div>
+        </div>
+      </div>
+      <div>
+        <label for="password2">Confirma Contraseña</label>
+        <input type="password" class="form-control" id="password2" nombre="password2" formControlName="password2"
+          [ngClass]="{ 'is-invalid': submitted && f.password2.errors }">
+        <div *ngIf="submitted && f.password2.errors" class="invalid-feedback">
+          <div *ngIf="f.password2.errors.required">Contraseña es requerido</div>
+          <div *ngIf="f.password2.errors.mustMatch">Contraseña no coincide</div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-secondary">{{btnText}}</button>
+    </div>
+  </form>
+</dialog-component>
