@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlEndPoint: 'http://3.21.105.60:5000' //
+  urlEndPoint: 'http://13.59.119.194:5000' //
   //urlEndPoint: 'http://localhost:5000' //
 };
 
