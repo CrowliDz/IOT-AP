@@ -7,7 +7,7 @@ import { Component, AfterViewInit, ElementRef } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
-  title = 'Midas';
+  title = 'EXC';
   currentComponent: string;
   constructor(private elementRef: ElementRef) {
 
