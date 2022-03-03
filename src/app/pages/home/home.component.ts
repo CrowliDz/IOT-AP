@@ -28,11 +28,17 @@ export class HomeComponent implements OnInit {
         class: 'be-green',
       },
       {
+        icon: 'power',
+        text: 'Machine',
+        function: '/machine-control',
+        class: 'be-green',
+      },
+    /*  {
         icon: 'settings_input_antenna',
         text: 'Temperature',
         function: '/temperature-control',
         class: 'be-green',
-      },
+      },*/
     ];
 
   }

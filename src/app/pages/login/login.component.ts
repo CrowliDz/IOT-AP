@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   alertRegister: String;
+  urlImg:string;
   alertSuccess: Boolean;
   submitted = false;
   constructor(private auth: AuthService, private router: Router, private formBuilder: FormBuilder) { }
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required],
     });
+    this.urlImg = "../../../favicon.png";
   }
   get f() { return this.loginForm.controls; }
 
@@ -43,7 +45,7 @@ export class LoginComponent implements OnInit {
       if (response.code == 200) {
         let usuario = response.dataUser;
         if (!usuario.token) {
-          this.alertRegister = "No se pudo iniciar sesión.";
+          this.alertRegister = "Fallo al iniciar sesión.";
         } else {
           this.auth.guardarUsuarioToken(usuario.token, usuario.id, usuario.expires);
           this.router.navigate(['/home']);

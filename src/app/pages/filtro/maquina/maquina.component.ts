@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LuzService } from '@app/services/luz.service';
+import { MaquinaService } from '@app/services/maquina.service';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { Spinner } from 'ngx-spinner/lib/ngx-spinner.enum';
@@ -10,20 +10,19 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { NuevoluzComponent } from '@app/pages/forms/nuevo-luz/nuevo-luz.component';
 
 am4core.useTheme(am4themes_animated);
 
 @Component({
-  selector: 'app-sensorluz',
-  templateUrl: './sensorluz.component.html',
-  styleUrls: ['./sensorluz.component.scss']
+  selector: 'app-maquina',
+  templateUrl: './maquina.component.html',
+  styleUrls: ['./maquina.component.scss']
 })
-export class SensorLuzComponent implements OnInit {
+export class MaquinaComponent implements OnInit {
 
   lista: [];
   form: FormGroup;
-  luzForm: FormGroup;
+  maquinaForm: FormGroup;
   submitted = false;
   newColor = false;
   status = "OFF";
@@ -36,7 +35,7 @@ export class SensorLuzComponent implements OnInit {
   isCollapsed = false;
 
   constructor(
-    private luzService: LuzService,
+    private maquinaService: MaquinaService,
     private spinner: NgxSpinnerService,
     private auth: AuthService,
     private formBuilder: FormBuilder,
@@ -45,16 +44,16 @@ export class SensorLuzComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      id_luz: [''],
-      nombre_luz: [''],
-      estado_luz: [''],
-      fecha_luz: [''],
-      code_luz: [''],
+      id_maquina: [''],
+      nombre_maquina: [''],
+      estado_maquina: [''],
+      fecha_maquina: [''],
+      code_maquina: [''],
     });
 
-    this.luzForm = this.formBuilder.group({
-      nombre_luz: ['', Validators.required],
-      code_luz: ['', Validators.required],
+    this.maquinaForm = this.formBuilder.group({
+      nombre_maquina: ['', Validators.required],
+      code_maquina: ['', Validators.required],
     });
 
     this.MQTT = this.formBuilder.group({
@@ -63,15 +62,15 @@ export class SensorLuzComponent implements OnInit {
     });
 
     this.grafica();
-    this.getLuz('');
+    this.getMaquina('');
 
   }
 
   //CRUD LUZ
 
-  async getLuz(searchValue: string) {
+  async getMaquina(searchValue: string) {
     try {
-      let resp = await this.luzService.get(searchValue, this.auth.token).toPromise();
+      let resp = await this.maquinaService.get(searchValue, this.auth.token).toPromise();
       if (resp.code == 200) {
         this.lista = resp.response;
         this.total = this.lista.length;
@@ -106,43 +105,27 @@ export class SensorLuzComponent implements OnInit {
     this.MQTT.value.message = this.status;
     console.log(this.MQTT.value)
     try {
-      let resp = await this.luzService.MQTTEncoder(this.MQTT.value).toPromise();
+      let resp = await this.maquinaService.MQTTEncoder(this.MQTT.value).toPromise();
 
     } catch (e) {
     }
   }
 
   async save(estado) {
-    this.form.value.id_luz = estado.id_luz;
-    this.form.value.nombre_luz = estado.nombre_luz;
-    this.form.value.fecha_luz = estado.fecha_luz;
-    this.form.value.code_luz = estado.code_luz;
+    this.form.value.id_maquina = estado.id_maquina;
+    this.form.value.nombre_maquina = estado.nombre_maquina;
+    this.form.value.fecha_maquina = estado.fecha_maquina;
+    this.form.value.code_maquina = estado.code_maquina;
     console.log(this.form.value)
-    this.SendMQTT(this.form.value.estado_luz, this.form.value.code_luz);
+    this.SendMQTT(this.form.value.estado_maquina, this.form.value.code_maquina);
     try {
-      let response; response = await this.luzService.update(this.form.value, this.auth.token).toPromise();
+      let response; response = await this.maquinaService.update(this.form.value, this.auth.token).toPromise();
       if (response.code == 200) {
-        this.getLuz('');
+        this.getMaquina('');
         this.form.reset({});
       }
     } catch (e) {
     }
-  }
-
-  async newLuz() {
-    const dialogRef = this.dialog.open(NuevoluzComponent, {
-      width: '25rem',
-      data: {
-        title: 'Crea Nuevo Objeto',
-        btnText: 'Ingresar',
-        alertSuccesText: 'Agregado correctamente!',
-        alertErrorText: "Fallo al agregar",
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(data => {
-      this.getLuz('');
-    });
   }
 
   //Cambio color boton
@@ -150,14 +133,14 @@ export class SensorLuzComponent implements OnInit {
   toggleColor(estado) {
     console.log('llega' + estado)
     //this.newColor = !this.newColor;
-    if (estado.estado_luz == 0) {
+    if (estado.estado_maquina == 0) {
       console.log("llega como 0 y cambia a 1")
-      this.form.value.estado_luz = 1;
+      this.form.value.estado_maquina = 1;
       console.log(this.form.value)
       this.save(estado);
-    } else if (estado.estado_luz == 1) {
+    } else if (estado.estado_maquina == 1) {
       console.log("llega como 1 y cambia a 0")
-      this.form.value.estado_luz = 0;
+      this.form.value.estado_maquina = 0;
       console.log(this.form.value)
       this.save(estado);
       //this.formt();
@@ -805,11 +788,11 @@ export class SensorLuzComponent implements OnInit {
       }
     }*/
    
-    get f() { return this.luzForm.controls; }
+    get f() { return this.maquinaForm.controls; }
   
     onSubmit() {
       this.submitted = true;
-      if (this.luzForm.invalid) {
+      if (this.maquinaForm.invalid) {
         return;
       } else {
         this.new();
@@ -817,14 +800,14 @@ export class SensorLuzComponent implements OnInit {
     }
   
     async new() {
-      console.log(this.luzForm.value)
+      console.log(this.maquinaForm.value)
       try {
-        let response = await this.luzService.create(this.luzForm.value, this.auth.token).toPromise();
+        let response = await this.maquinaService.create(this.maquinaForm.value, this.auth.token).toPromise();
         if (response.code == 200) {
           Swal.fire('Guardado', 'El registro ha sido guardado!', 'success');
-          this.getLuz('');
+          this.getMaquina('');
           this.submitted = false;
-          this.luzForm.reset({});
+          this.maquinaForm.reset({});
         }
       } catch (error) {
         Swal.fire('Error', 'No fue posible guardar el registro!', 'error');
@@ -839,10 +822,10 @@ export class SensorLuzComponent implements OnInit {
         cancelButtonColor: '#d33', confirmButtonText: 'Si!', cancelButtonText: 'Cancelar!'
       }).then((result) => {
         if (result.value) {
-          this.luzService.delete(obj.id_luz, this.auth.token).subscribe(res => {
+          this.maquinaService.delete(obj.id_maquina, this.auth.token).subscribe(res => {
             if (res.code == 200) {
               Swal.fire('Eliminado', 'El registro ha sido borrado!', 'success');
-              this.getLuz('');
+              this.getMaquina('');
             } else {
               Swal.fire('Error', 'No fue posible borrar el registro!', 'error');
             }

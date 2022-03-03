@@ -20,20 +20,13 @@ import localeEsMX from '@angular/common/locales/es-MX';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatTabsModule} from '@angular/material/tabs';
 
 //COMPONENTES ADICIONALES
 import { HeaderComponent } from './components/header/header.component';
-import { PieComponent } from './components/charts/pie/pie.component';
-import { PaginationBarComponent } from './components/pagination-bar/pagination-bar.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { FilePickerComponent } from './components/file-picker/file-picker.component';
-import { BarraComponent } from './components/charts/barra/barra.component';
-import { TimeLineComponent } from './components/charts/time-line/time-line.component';
-import { HeaderTableComponent } from './components/header-table/header-table.component';
-import { DonutComponent } from './components/charts/donut/donut.component';
-import { LayeredComponent } from './components/charts/layered/layered.component';
 import { CardTitleComponent } from './components/card-title/card-title.component';
-import { FilterByComponent } from './components/filter-by/filter-by.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 
 //COMPONENTES GENERALES
@@ -45,11 +38,13 @@ import { DepartamentosComponent } from './pages/filtro/departamentos/departament
 import { UsuariosComponent } from './pages/filtro/usuarios/usuarios.component';
 import { ProductosComponent } from './pages/filtro/productos/productos.component';
 import { SensorLuzComponent } from './pages/filtro/sensorluz/sensorluz.component';
+import { MaquinaComponent } from './pages/filtro/maquina/maquina.component';
 
 //COMPONENTES -FORMS
 import { NuevoDepartamentoComponent } from './pages/forms/nuevo-departamento/nuevo-departamento.component';
 import { NuevoCiaComponent } from './pages/forms/nuevo-cia/nuevo-cia.component';
 import { NuevoUsuarioComponent } from './pages/forms/nuevo-usuario/nuevo-usuario.component';
+import { NuevoluzComponent } from './pages/forms/nuevo-luz/nuevo-luz.component';
 import { EditarUsuarioComponent } from './pages/forms/editar-usuario/editar-usuario.component';
 import { CambiarContrComponent } from './pages/forms/cambiar-contr/cambiar-contr.component';
 
@@ -62,29 +57,23 @@ registerLocaleData(localeEsMX, 'es-Mx');
   declarations: [
     AppComponent,
     HeaderComponent,
-    PieComponent,
-    PaginationBarComponent,
+    FooterComponent,
     DropdownComponent,
     NuevoDepartamentoComponent,
     NuevoCiaComponent,
     NuevoUsuarioComponent,
+    NuevoluzComponent,
     HomeComponent,
     DepartamentosComponent,
-    FilePickerComponent,
     LoginComponent,
     UsuariosComponent,
-    BarraComponent,
-    TimeLineComponent,
-    HeaderTableComponent,
-    DonutComponent,
-    LayeredComponent,
     CardTitleComponent,
-    FilterByComponent,
     DialogComponent,
     ProductosComponent,
     EditarUsuarioComponent,
     CambiarContrComponent,
     SensorLuzComponent,
+    MaquinaComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,12 +93,14 @@ registerLocaleData(localeEsMX, 'es-Mx');
     MatButtonModule,
     MatButtonToggleModule,
     MatSlideToggleModule,
+    MatTabsModule,
   ],
-  providers: [ DatePipe, { provide: LOCALE_ID, useValue: 'es-Mx' }],
+
+providers: [ DatePipe,  { provide: LOCALE_ID, useValue: 'es-Mx' }],
 
   bootstrap: [AppComponent],
   entryComponents: [
-    NuevoDepartamentoComponent, NuevoUsuarioComponent, EditarUsuarioComponent, CambiarContrComponent, 
+     NuevoluzComponent,
 
   ]
 })

@@ -20,15 +20,19 @@
   .alert {
     margin-top: 1rem;
   }
-
+  .icono {
+    width: 5rem;
+    align-items: center;
+    text-align: center;
+    margin: 2rem;
+}
   .form-container {
     // border: 1px solid green;
-    height: 20rem;
+    height: 100%;
     width: 25rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5rem;
 
     .form-style {
       //border: 2px solid black;
@@ -41,8 +45,8 @@
 
       .form {
         .btn-custom {
-          background-color: #4E8689;
-          border-color: #4E8689;
+          background-color: #58ab23;
+          border-color: #58ab23;
         }
 
         .form-row-custom {
@@ -65,7 +69,7 @@
         cursor: pointer;
 
         &:hover {
-          color: #4E8689;
+          color: #58ab23;
         }
       }
     }

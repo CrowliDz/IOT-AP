@@ -10,6 +10,7 @@ import { UsuariosComponent } from './pages/filtro/usuarios/usuarios.component';
 import { DepartamentosComponent } from './pages/filtro/departamentos/departamentos.component';
 import { ProductosComponent } from './pages/filtro/productos/productos.component';
 import { SensorLuzComponent } from './pages/filtro/sensorluz/sensorluz.component';
+import { MaquinaComponent } from './pages/filtro/maquina/maquina.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'departament', component: DepartamentosComponent, canActivate: [AuthGuard] },
   { path: 'product', component: ProductosComponent, canActivate: [AuthGuard] },
   { path: 'light-control', component: SensorLuzComponent, canActivate: [AuthGuard] },
+  { path: 'machine-control', component: MaquinaComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   declarations: [],

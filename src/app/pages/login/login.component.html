@@ -3,17 +3,17 @@
 
         <!-- LOG IN -->
         <div class="form-style animated fadeIn">
-            <h1 class="login-text"> Iniciar sesión </h1>
+            <a [routerLink]="['/home']" class="navbar-brand tittle_text"><img class="icono" [src]="urlImg" alt="IOT">LOGIN</a>
             <form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit()">
                 <div class="form-row-custom">
-                    <input type="text" placeholder="Correo" formControlName="email" class="form-control"
+                    <input type="text" placeholder="E-Mail" formControlName="email" class="form-control"
                         [ngClass]="{'is-invalid': loginForm.controls.email.errors && loginForm.controls.email.dirty }" />
                 </div>
                 <div class="form-row-custom">
                     <input type="password" placeholder="Contraseña" formControlName="password" class="form-control"
                         [ngClass]="{'is-invalid': loginForm.controls.password.errors && loginForm.controls.password.dirty }" />
                 </div>
-                <input type="submit" value="Entrar" class="btn btn-primary btn-custom btn-lg btn-block"
+                <input type="submit" value="INICIAR SESIÓN" class="btn btn-primary btn-custom btn-lg btn-block"
                     [disabled]="loginForm.status !== 'VALID'" />
             </form>
             <div class="alert animated fadeIn" *ngIf="alertRegister"

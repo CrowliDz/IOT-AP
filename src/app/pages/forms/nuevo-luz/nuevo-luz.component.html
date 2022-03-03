@@ -1,0 +1,25 @@
+<dialog-component [title]="title" (closeEmit)="closeModal()" [alertMessage]="alertMessage">
+  <form [formGroup]="luzForm" (ngSubmit)="onSubmit()">
+    <div class="form-row col-md-12">
+      <div class="form-group col-md-5">
+        <label for="luz">Nombre</label>
+        <input type="text" class="form-control" id="nombre_luz" nombre="nombre_luz" formControlName="nombre_luz"
+          [ngClass]="{ 'is-invalid': submitted && f.nombre_luz.errors }">
+        <div *ngIf="submitted && f.nombre_luz.errors" class="invalid-feedback">
+          <div *ngIf="f.nombre_luz.errors.required">Nombre de objeto es requerido</div>
+        </div>
+      </div>
+      <div class="form-group col-md-5">
+        <label for="codigo">Codigo</label>
+        <input type="text" class="form-control" id="code_luz" nombre="code_luz" formControlName="code_luz"
+          [ngClass]="{ 'is-invalid': submitted && f.code_luz.errors }">
+        <div *ngIf="submitted && f.code_luz.errors" class="invalid-feedback">
+          <div *ngIf="f.code_luz.errors.required">Codigo de objeto es requerido</div>
+        </div>
+      </div>
+      <div class="form-group  col-md-2  align-self-end justify-content-end">
+        <button type="submit" class="btn btn-">Guardar</button>
+      </div>
+    </div>
+  </form>
+</dialog-component>

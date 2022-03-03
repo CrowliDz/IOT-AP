@@ -1,25 +1,25 @@
 <div class="moduloI mb-1 mx-1">
 <!-- 
     <div class="d-flex justify-content-center">
-        <a (click)="newLuz()" class="btn btn-primary">Nuevo</a>
+        <a (click)="newMaquina()" class="btn btn-primary">Nuevo</a>
     </div>
 -->
     <mat-tab-group>
-        <mat-tab label="Light">
+        <mat-tab label="Machine">
 
             <div class="row">
                 <div *ngFor="let l of lista">
-                    <a [ngStyle]="{'background-color': (l.estado_luz == 0) ? 'red' : '#00ff00'}"
-                        (click)="toggleColor(l)" mat-fab> <i class="material-icons fa fa-lightbulb-o"></i>
+                    <a [ngStyle]="{'background-color': (l.estado_maquina == 0) ? 'red' : '#00ff00'}"
+                        (click)="toggleColor(l)" mat-fab> <i class="material-icons">power</i>
                     </a>
-                    <p class="nomluz"> {{ l.nombre_luz }} </p>
+                    <p class="nommaquina"> {{ l.nombre_maquina }} </p>
                 </div>
             </div>
 
         </mat-tab>
         <mat-tab label="List">
             <div class="mb-1 mx-1">
-                <form [formGroup]="luzForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="maquinaForm" (ngSubmit)="onSubmit()">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -30,21 +30,21 @@
                             <tr>
                                 <th scope="col">
                                     <div class=" ">
-                                        <input type="text" class="form-control" id="nombre_luz" nombre="nombre_luz"
-                                            formControlName="nombre_luz"
-                                            [ngClass]="{ 'is-invalid': submitted && f.nombre_luz.errors }">
-                                        <div *ngIf="submitted && f.nombre_luz.errors" class="invalid-feedback">
-                                            <div *ngIf="f.nombre_luz.errors.required">Nombre es requerido</div>
+                                        <input type="text" class="form-control" id="nombre_maquina" nombre="nombre_maquina"
+                                            formControlName="nombre_maquina"
+                                            [ngClass]="{ 'is-invalid': submitted && f.nombre_maquina.errors }">
+                                        <div *ngIf="submitted && f.nombre_maquina.errors" class="invalid-feedback">
+                                            <div *ngIf="f.nombre_maquina.errors.required">Nombre es requerido</div>
                                         </div>
                                     </div>
                                 </th>
                                 <th>
                                     <div class=" ">
-                                        <input type="text" class="form-control" id="code_luz" nombre="code_luz"
-                                            formControlName="code_luz"
-                                            [ngClass]="{ 'is-invalid': submitted && f.code_luz.errors }">
-                                        <div *ngIf="submitted && f.code_luz.errors" class="invalid-feedback">
-                                            <div *ngIf="f.code_luz.errors.required">Codigo es requerido</div>
+                                        <input type="text" class="form-control" id="codigo_maquina" nombre="codigo_maquina"
+                                            formControlName="codigo_maquina"
+                                            [ngClass]="{ 'is-invalid': submitted && f.codigo_maquina.errors }">
+                                        <div *ngIf="submitted && f.codigo_maquina.errors" class="invalid-feedback">
+                                            <div *ngIf="f.codigo_maquina.errors.required">Codigo es requerido</div>
                                         </div>
                                     </div>
                                 </th>
@@ -57,8 +57,8 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let lu of lista">
-                                <td>{{lu.nombre_luz}}</td>
-                                <td>{{lu.code_luz }}</td>
+                                <td>{{lu.nombre_maquina}}</td>
+                                <td>{{lu.codigo_maquina }}</td>
                                 <td>
                                     <a class="btn" data-toggle="tooltip" data-placement="top" title="Eliminar"
                                         (click)="delete(lu)"><i class="dos material-icons ">delete</i></a>
