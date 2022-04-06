@@ -44,6 +44,7 @@ export class SensorLuzComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.token = this.auth.token;
     this.form = this.formBuilder.group({
       id_luz: [''],
       nombre_luz: [''],
@@ -71,7 +72,7 @@ export class SensorLuzComponent implements OnInit {
 
   async getLuz(searchValue: string) {
     try {
-      let resp = await this.luzService.get(searchValue, this.auth.token).toPromise();
+      let resp = await this.luzService.get(searchValue, this.token).toPromise();
       if (resp.code == 200) {
         this.lista = resp.response;
         this.total = this.lista.length;
@@ -120,7 +121,7 @@ export class SensorLuzComponent implements OnInit {
     console.log(this.form.value)
     this.SendMQTT(this.form.value.estado_luz, this.form.value.code_luz);
     try {
-      let response; response = await this.luzService.update(this.form.value, this.auth.token).toPromise();
+      let response; response = await this.luzService.update(this.form.value, this.token).toPromise();
       if (response.code == 200) {
         this.getLuz('');
         this.form.reset({});

@@ -1,5 +1,6 @@
 .navbar {
         z-index:500 !important;
+        justify-content: center;
     .icono-icma {
         width: 2rem;
         padding-right: 5px;
@@ -13,7 +14,7 @@
 
     .navbar-nav {
         width: 100%;
-        justify-content: flex-end;
+        justify-content: center;
     }
 
     .nav-link {

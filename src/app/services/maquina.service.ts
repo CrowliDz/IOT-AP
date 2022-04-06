@@ -20,7 +20,7 @@ export class MaquinaService {
 
   MQTTEncoder(MQTT): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders();
-    const url = `http://3.16.1.247:3000`;
+    const url = `http://52.14.16.49:3000`;
     return this.http.get(`${url + '/sendMachine?'}topic=${MQTT.topic}&message=${MQTT.message}`, { headers });
   }
 

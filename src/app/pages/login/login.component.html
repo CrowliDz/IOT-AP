@@ -3,7 +3,7 @@
 
         <!-- LOG IN -->
         <div class="form-style animated fadeIn">
-            <a [routerLink]="['/home']" class="navbar-brand tittle_text"><img class="icono" [src]="urlImg" alt="IOT">LOGIN</a>
+            <a [routerLink]="['/home']" class="navbar-brand tittle_text"><img class="icono" [src]="urlImg" alt="IOT"></a>
             <form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit()">
                 <div class="form-row-custom">
                     <input type="text" placeholder="E-Mail" formControlName="email" class="form-control"
@@ -14,7 +14,8 @@
                         [ngClass]="{'is-invalid': loginForm.controls.password.errors && loginForm.controls.password.dirty }" />
                 </div>
                 <input type="submit" value="INICIAR SESIÓN" class="btn btn-primary btn-custom btn-lg btn-block"
-                    [disabled]="loginForm.status !== 'VALID'" />
+                    [disabled]="loginForm.status !== 'VALID'"> 
+                <a class="btn btn-primary btn-custom btn-lg btn-block" (click)="register()"> REGISTRAR </a>
             </form>
             <div class="alert animated fadeIn" *ngIf="alertRegister"
                 [ngClass]="{'alert-danger': !alertSuccess, 'alert-success': alertSuccess  }">
