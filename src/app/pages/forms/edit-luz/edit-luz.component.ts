@@ -7,12 +7,12 @@ import { Dialog } from '@app/classes/Dialog';
 import { AuthService } from '@app/services/auth.service';
 
 @Component({
-  selector: 'app-nuevo-luz',
-  templateUrl: './nuevo-luz.component.html',
-  styleUrls: ['./nuevo-luz.component.scss'],
+  selector: 'app-edit-luz',
+  templateUrl: './edit-luz.component.html',
+  styleUrls: ['./edit-luz.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NuevoluzComponent extends Dialog implements OnInit {
+export class EditluzComponent extends Dialog implements OnInit {
 
   luz: [];
   luzForm: FormGroup;
@@ -22,7 +22,7 @@ export class NuevoluzComponent extends Dialog implements OnInit {
   constructor(
     private luzService: LuzService,
     private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<NuevoluzComponent>,
+    public dialogRef: MatDialogRef<EditluzComponent>,
     private auth: AuthService,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
@@ -31,6 +31,7 @@ export class NuevoluzComponent extends Dialog implements OnInit {
 
   ngOnInit() {
     this.luzForm = this.formBuilder.group({
+      id_luz: [''],
       nombre_luz: ['', Validators.required],
       code_luz: ['', Validators.required],
     });
@@ -39,16 +40,16 @@ export class NuevoluzComponent extends Dialog implements OnInit {
   }
 
   loadModalTexts() {
-    const { title, btnText, alertErrorText, alertSuccesText,luz } = this.data;
+    const { title, btnText, alertErrorText, alertSuccesText, obj } = this.data;
     this.title = title;
     this.btnText = btnText;
     this.alertSuccesText = alertSuccesText;
     this.alertErrorText = alertErrorText;
 
-    if (luz) {
-      const { nombre_luz, code_luz} = luz;
+    if (obj) {
+      const { id_luz, nombre_luz, code_luz} = obj;
 
-      this.luzForm.patchValue({ nombre_luz, code_luz});
+      this.luzForm.patchValue({ id_luz, nombre_luz, code_luz});
     }
   }
 
@@ -59,26 +60,23 @@ export class NuevoluzComponent extends Dialog implements OnInit {
     if (this.luzForm.invalid) {
       return;
     } else {
-      this.guardar();
+      this.update();
     }
   }
 
-  async guardar() {
+  async update() {
     try {
       
-      let response = await this.luzService.create(this.luzForm.value, this.auth.token).toPromise();
+      let response;
+      response = await this.luzService.update(this.luzForm.value, this.auth.token).toPromise();
       if (response.code == 200) {
-        this.showAlert(this.alertSuccesText, true);
+        //this.showAlert(this.alertSuccesText, true);
         this.closeModal();
         this.submitted = false;
         this.luzForm.reset({});
-        console.log(this.luzForm.value)
-      }
-      else {
-        this.showAlert(this.alertErrorText, false);
       }
     } catch (e) {
-      this.showAlert(e.error.message, false);
+      
     }
   }
 

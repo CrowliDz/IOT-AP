@@ -5,8 +5,10 @@
     </div>
 -->
     <mat-tab-group>
+      <!-- <mat-tab label="Graphs">
+            <app-grafica-linea> <div id="chartdiv" style="width: 100%; height: 300px"></div> </app-grafica-linea>
+        </mat-tab>-->  
         <mat-tab label="Light">
-
             <div class="row">
                 <div *ngFor="let l of lista">
                     <a [ngStyle]="{'background-color': (l.estado_luz == 0) ? 'red' : '#00ff00'}"
@@ -15,7 +17,6 @@
                     <p class="nomluz"> {{ l.nombre_luz }} </p>
                 </div>
             </div>
-
         </mat-tab>
         <mat-tab label="List">
             <div class="mb-1 mx-1">
@@ -31,7 +32,7 @@
                                 <th scope="col">
                                     <div class=" ">
                                         <input type="text" class="form-control" id="nombre_luz" nombre="nombre_luz"
-                                            formControlName="nombre_luz"
+                                            formControlName="nombre_luz" placeholder="Foco de Maquina #"
                                             [ngClass]="{ 'is-invalid': submitted && f.nombre_luz.errors }">
                                         <div *ngIf="submitted && f.nombre_luz.errors" class="invalid-feedback">
                                             <div *ngIf="f.nombre_luz.errors.required">Nombre es requerido</div>
@@ -41,7 +42,7 @@
                                 <th>
                                     <div class=" ">
                                         <input type="text" class="form-control" id="code_luz" nombre="code_luz"
-                                            formControlName="code_luz"
+                                            formControlName="code_luz" placeholder="IOT#"
                                             [ngClass]="{ 'is-invalid': submitted && f.code_luz.errors }">
                                         <div *ngIf="submitted && f.code_luz.errors" class="invalid-feedback">
                                             <div *ngIf="f.code_luz.errors.required">Codigo es requerido</div>
@@ -60,7 +61,9 @@
                                 <td>{{lu.nombre_luz}}</td>
                                 <td>{{lu.code_luz }}</td>
                                 <td>
-                                    <a class="btn" data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                    <a class="btn" data-toggle="tooltip" data-placement="top" title="Editar"
+                                        (click)="update(lu)"><i class="dos material-icons ">edit</i></a>
+                                        <a class="btn" data-toggle="tooltip" data-placement="top" title="Eliminar"
                                         (click)="delete(lu)"><i class="dos material-icons ">delete</i></a>
                                 </td>
                             </tr>

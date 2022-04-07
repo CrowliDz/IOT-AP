@@ -23,4 +23,8 @@ export class HeaderComponent implements OnInit {
     Swal.fire('Sesión cerrada!', '', 'success');
     this.router.navigate(['/login']);
   }
+
+  config(){
+    
+  }
 }

@@ -1,5 +1,5 @@
 <div class="moduloI mb-1 mx-1">
-<!-- 
+    <!-- 
     <div class="d-flex justify-content-center">
         <a (click)="newMaquina()" class="btn btn-primary">Nuevo</a>
     </div>
@@ -25,13 +25,14 @@
                             <tr>
                                 <th scope="col" style="width:auto">Nombre</th>
                                 <th scope="col" style="width:auto">Codigo</th>
+                                <th scope="col" style="width:auto">Luz</th>
                                 <th scope="col" style="width:auto"></th>
                             </tr>
                             <tr>
                                 <th scope="col">
                                     <div class=" ">
-                                        <input type="text" class="form-control" id="nombre_maquina" nombre="nombre_maquina"
-                                            formControlName="nombre_maquina"
+                                        <input type="text" class="form-control" id="nombre_maquina"
+                                            nombre="nombre_maquina" formControlName="nombre_maquina"
                                             [ngClass]="{ 'is-invalid': submitted && f.nombre_maquina.errors }">
                                         <div *ngIf="submitted && f.nombre_maquina.errors" class="invalid-feedback">
                                             <div *ngIf="f.nombre_maquina.errors.required">Nombre es requerido</div>
@@ -40,12 +41,22 @@
                                 </th>
                                 <th>
                                     <div class=" ">
-                                        <input type="text" class="form-control" id="codigo_maquina" nombre="codigo_maquina"
-                                            formControlName="codigo_maquina"
+                                        <input type="text" class="form-control" id="codigo_maquina"
+                                            nombre="codigo_maquina" formControlName="codigo_maquina"
                                             [ngClass]="{ 'is-invalid': submitted && f.codigo_maquina.errors }">
                                         <div *ngIf="submitted && f.codigo_maquina.errors" class="invalid-feedback">
                                             <div *ngIf="f.codigo_maquina.errors.required">Codigo es requerido</div>
                                         </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class=" ">
+                                        <select class="form-control" id="id_luz" nombre="id_luz" formControlName="id_luz"
+                                        [ngClass]="{ 'is-invalid': submitted && f.id_luz.errors }">
+                                        <option *ngFor="let lz of listaLuz" [value]="lz.id_luz">
+                                            {{lz.nombre_luz | titlecase}}
+                                        </option>
+                                    </select>
                                     </div>
                                 </th>
                                 <th>
@@ -59,7 +70,10 @@
                             <tr *ngFor="let lu of lista">
                                 <td>{{lu.nombre_maquina}}</td>
                                 <td>{{lu.codigo_maquina }}</td>
+                                <td>{{lu.Luz.nombre_luz }}</td>
                                 <td>
+                                    <a class="btn" data-toggle="tooltip" data-placement="top" title="Editar"
+                                        (click)="update(lu)"><i class="dos material-icons ">edit</i></a>
                                     <a class="btn" data-toggle="tooltip" data-placement="top" title="Eliminar"
                                         (click)="delete(lu)"><i class="dos material-icons ">delete</i></a>
                                 </td>

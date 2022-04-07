@@ -1,8 +1,7 @@
-@import '../../../../assets/variables.scss';
-@import 'material-icons/iconfont/material-icons.css';
+
 
 #chartdiv {
-  width: 100%;
+  width: 50%;
   height: 500px;
 }
 
@@ -10,33 +9,8 @@
   margin-top: 4rem;
 }
 
-.footer {
-  text-align: center;
-}
-
-.c {
-  margin-left: 4px;
-  margin-right: 4px;
-  //width: 45%
-}
-
 .btn{
   padding: .0rem .5rem;
-}
-
-.btn-add {
-  padding: .0rem .75rem;
-  vertical-align: bottom;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-.example-button-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 }
 
 .section {

@@ -1,0 +1,34 @@
+<dialog-component [title]="title" (closeEmit)="closeModal()" [alertMessage]="alertMessage">
+  <form [formGroup]="maquinaForm" (ngSubmit)="onSubmit()">
+    <div class="form-row col-md-12">
+      <div class="form-group col-md-4">
+        <label for="maquina">Nombre</label>
+        <input type="text" class="form-control" id="nombre_maquina" nombre="nombre_maquina"
+          formControlName="nombre_maquina" [ngClass]="{ 'is-invalid': submitted && f.nombre_maquina.errors }">
+        <div *ngIf="submitted && f.nombre_maquina.errors" class="invalid-feedback">
+          <div *ngIf="f.nombre_maquina.errors.required">Nombre de objeto es requerido</div>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="codigo">Codigo</label>
+        <input type="text" class="form-control" id="codigo_maquina" nombre="codigo_maquina"
+          formControlName="codigo_maquina" [ngClass]="{ 'is-invalid': submitted && f.codigo_maquina.errors }">
+        <div *ngIf="submitted && f.codigo_maquina.errors" class="invalid-feedback">
+          <div *ngIf="f.codigo_maquina.errors.required">Codigo de objeto es requerido</div>
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="codigo">Luz</label>
+        <select class="form-control" id="id_luz" nombre="id_luz" formControlName="id_luz"
+          [ngClass]="{ 'is-invalid': submitted && f.id_luz.errors }">
+          <option *ngFor="let lz of listaLuz" [value]="lz.id_luz">
+            {{lz.nombre_luz }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group  col-md-1  align-self-end justify-content-end">
+        <button type="submit" class="btn btn-">Guardar</button>
+      </div>
+    </div>
+  </form>
+</dialog-component>

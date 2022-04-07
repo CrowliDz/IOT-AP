@@ -87,6 +87,11 @@ div.card-grafica:hover {
   font-size: 48px;
 }
 
+.card{
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+}
+
 .card-body-custom {
   display: flex;
   flex-direction: column;

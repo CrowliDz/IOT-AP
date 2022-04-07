@@ -28,6 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { CardTitleComponent } from './components/card-title/card-title.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { GraficaLineaComponent } from './components/grafica-linea/grafica-linea.component';
 
 //COMPONENTES GENERALES
 import { HomeComponent } from './pages/home/home.component';
@@ -44,7 +45,8 @@ import { MaquinaComponent } from './pages/filtro/maquina/maquina.component';
 import { NuevoDepartamentoComponent } from './pages/forms/nuevo-departamento/nuevo-departamento.component';
 import { NuevoCiaComponent } from './pages/forms/nuevo-cia/nuevo-cia.component';
 import { NuevoUsuarioComponent } from './pages/forms/nuevo-usuario/nuevo-usuario.component';
-import { NuevoluzComponent } from './pages/forms/nuevo-luz/nuevo-luz.component';
+import { EditluzComponent  } from './pages/forms/edit-luz/edit-luz.component';
+import { EditMaquinaComponent  } from './pages/forms/edit-maquina/edit-maquina.component';
 import { EditarUsuarioComponent } from './pages/forms/editar-usuario/editar-usuario.component';
 import { CambiarContrComponent } from './pages/forms/cambiar-contr/cambiar-contr.component';
 
@@ -62,7 +64,7 @@ registerLocaleData(localeEsMX, 'es-Mx');
     NuevoDepartamentoComponent,
     NuevoCiaComponent,
     NuevoUsuarioComponent,
-    NuevoluzComponent,
+    EditluzComponent,
     HomeComponent,
     DepartamentosComponent,
     LoginComponent,
@@ -74,6 +76,8 @@ registerLocaleData(localeEsMX, 'es-Mx');
     CambiarContrComponent,
     SensorLuzComponent,
     MaquinaComponent,
+    GraficaLineaComponent,
+    EditMaquinaComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +104,7 @@ providers: [ DatePipe,  { provide: LOCALE_ID, useValue: 'es-Mx' }],
 
   bootstrap: [AppComponent],
   entryComponents: [
-     NuevoluzComponent,
+    EditluzComponent , GraficaLineaComponent, EditMaquinaComponent,
 
   ]
 })

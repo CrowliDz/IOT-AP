@@ -17,6 +17,11 @@ export class LuzService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this.http.get(this.url + '/get', { headers, params: params });
   }
+  
+  P_EstadoYCodeX( token): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this.http.get(this.url + '/P_EstadoYCodeX', { headers});
+  }
 
   MQTTEncoder(MQTT): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders();
