@@ -6,9 +6,9 @@ import * as environment from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class MaquinaService {
+export class ConfigusService {
 
-  private url: string = environment.environment.urlEndPoint + '/Maquina';
+  private url: string = environment.environment.urlEndPoint + '/Configus';
   constructor(private http: HttpClient) { }
 
   get(name: string, token): Observable<any> {
@@ -17,23 +17,21 @@ export class MaquinaService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this.http.get(this.url + '/get', { headers, params: params });
   }
-
-  get2(name, token): Observable<any> {
-    let params = new HttpParams();
-    params = params.append('busqueda', name);
+  
+  P_ObjetosEnFuncion( token): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
-    return this.http.get(this.url + '/get2', { headers, params: params });
+    return this.http.get(this.url + '/P_ObjetosEnFuncion', { headers});
   }
 
   MQTTEncoder(MQTT): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders();
     const url = `http://52.14.16.49:3000`;
-    return this.http.get(`${url + '/sendMachine?'}topic=${MQTT.topic}&message=${MQTT.message}`, { headers });
+    return this.http.get(`${url + '/sendLight?'}topic=${MQTT.topic}&message=${MQTT.message}`, { headers });
   }
 
-  create(Maquina, token): Observable<any> {
+  create(Configus, token): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
-    return this.http.post<any>(this.url + '/get', Maquina, { headers });
+    return this.http.post<any>(this.url + '/get', Configus, { headers });
   }
 
   read(id, token): Observable<any> {
@@ -46,13 +44,8 @@ export class MaquinaService {
     return this.http.delete<any>(`${this.url + '/read'}/${id}`, { headers });
   }
 
-  update(maquina, token) {
+  update(configus, token) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
-    return this.http.put(`${this.url + '/read'}/${maquina.id_maquina}`, maquina, { headers });
-  }
-
-  update2(maquina, token) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
-    return this.http.put(`${this.url + '/up'}/${maquina.id_luz}`, maquina, { headers });
+    return this.http.put(`${this.url + '/read'}/${configus.id_config}`, configus, { headers });
   }
 }

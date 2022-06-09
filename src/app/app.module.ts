@@ -33,6 +33,7 @@ import { GraficaLineaComponent } from './components/grafica-linea/grafica-linea.
 //COMPONENTES GENERALES
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ConfigUsComponent } from './pages/forms/config-us/config-us.component';
 
 //COMPONENTES - FILTRO
 import { DepartamentosComponent } from './pages/filtro/departamentos/departamentos.component';
@@ -78,6 +79,7 @@ registerLocaleData(localeEsMX, 'es-Mx');
     MaquinaComponent,
     GraficaLineaComponent,
     EditMaquinaComponent,
+    ConfigUsComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,7 +106,7 @@ providers: [ DatePipe,  { provide: LOCALE_ID, useValue: 'es-Mx' }],
 
   bootstrap: [AppComponent],
   entryComponents: [
-    EditluzComponent , GraficaLineaComponent, EditMaquinaComponent,
+    EditluzComponent , GraficaLineaComponent, EditMaquinaComponent, ConfigUsComponent,
 
   ]
 })

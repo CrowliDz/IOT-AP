@@ -1,0 +1,35 @@
+<dialog-component [title]="title" (closeEmit)="closeModal()" [alertMessage]="alertMessage">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row col-md-12">
+      <div class="form-group col-md-12">
+        <label for="vinculo_config">Permitir Vinculo de Luz y Maquina</label><br>
+        <mat-slide-toggle id="vinculo_config" nombre="vinculo_config" (change)="vinculo()" formControlName="vinculo_config"
+          [ngClass]="{ 'is-invalid': submitted && f.vinculo_config.errors }">
+        </mat-slide-toggle>
+      </div>
+      <div class="form-group col-md-12">
+        <label for="alarma">Permitir Alarmas</label><br>
+        <mat-slide-toggle id="alarma_config" nombre="alarma_config" (change)="alarma()" formControlName="alarma_config"
+          [ngClass]="{ 'is-invalid': submitted && f.alarma_config.errors }">
+        </mat-slide-toggle>
+      </div>
+      <div class="form-group col-md-12">
+        <label for="min-config">Min de objetos activos</label>
+        <input type="number" class="form-control" id="min_config" nombre="min_config" formControlName="min_config"
+          placeholder="min. de objetos" [ngClass]="{ 'is-invalid': submitted && f.min_config.errors }">
+        <div *ngIf="submitted && f.min_config.errors" class="invalid-feedback">
+          <div *ngIf="f.min_config.errors.required">Un minimo es requerido</div>
+        </div>
+      </div>
+      <div class="form-group col-md-12">
+        <label for="grafica_config">Permitir Graficas</label><br>
+        <mat-slide-toggle id="grafica_config" nombre="grafica_config" (change)="grafica()"
+          formControlName="grafica_config" [ngClass]="{ 'is-invalid': submitted && f.grafica_config.errors }">
+        </mat-slide-toggle>
+      </div>
+      <div class="form-group col-md-12  align-self-end justify-content-end">
+        <button type="submit" class="btn btn-primary align-self-end justify-content-end">Guardar</button>
+      </div>
+    </div>
+  </form>
+</dialog-component>

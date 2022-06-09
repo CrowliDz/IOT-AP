@@ -53,6 +53,7 @@
                                     <div class=" ">
                                         <select class="form-control" id="id_luz" nombre="id_luz" formControlName="id_luz"
                                         [ngClass]="{ 'is-invalid': submitted && f.id_luz.errors }">
+                                        <option value=""  > Ninguno </option>
                                         <option *ngFor="let lz of listaLuz" [value]="lz.id_luz">
                                             {{lz.nombre_luz | titlecase}}
                                         </option>
@@ -70,7 +71,8 @@
                             <tr *ngFor="let lu of lista">
                                 <td>{{lu.nombre_maquina}}</td>
                                 <td>{{lu.codigo_maquina }}</td>
-                                <td>{{lu.Luz.nombre_luz }}</td>
+                                <td  *ngIf="!lu.id_luz"> </td>
+                                <td *ngIf="lu.id_luz" > {{lu.Luz.nombre_luz }}</td>
                                 <td>
                                     <a class="btn" data-toggle="tooltip" data-placement="top" title="Editar"
                                         (click)="update(lu)"><i class="dos material-icons ">edit</i></a>

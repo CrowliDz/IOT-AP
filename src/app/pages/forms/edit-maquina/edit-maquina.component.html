@@ -21,6 +21,7 @@
         <label for="codigo">Luz</label>
         <select class="form-control" id="id_luz" nombre="id_luz" formControlName="id_luz"
           [ngClass]="{ 'is-invalid': submitted && f.id_luz.errors }">
+          <option value=""  > Ninguno </option>
           <option *ngFor="let lz of listaLuz" [value]="lz.id_luz">
             {{lz.nombre_luz }}
           </option>

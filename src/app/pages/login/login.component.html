@@ -13,7 +13,7 @@
                     <input type="password" placeholder="Contraseña" formControlName="password" class="form-control"
                         [ngClass]="{'is-invalid': loginForm.controls.password.errors && loginForm.controls.password.dirty }" />
                 </div>
-                <input type="submit" value="INICIAR SESIÓN" class="btn btn-primary btn-custom btn-lg btn-block"
+                <input type="submit" value="INICIAR SESIÓN" class="btn btn-primary btn-custom btn-lg btn-block disabled"
                     [disabled]="loginForm.status !== 'VALID'"> 
                 <a class="btn btn-primary btn-custom btn-lg btn-block" (click)="register()"> REGISTRAR </a>
             </form>

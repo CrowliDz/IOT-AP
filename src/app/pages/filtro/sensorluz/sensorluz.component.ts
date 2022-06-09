@@ -11,6 +11,8 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { EditluzComponent  } from '@app/pages/forms/edit-luz/edit-luz.component';
+import { ConfigusService } from '@app/services/configus.service';
+import { MaquinaService } from '@app/services/maquina.service';
 
 am4core.useTheme(am4themes_animated);
 
@@ -21,10 +23,14 @@ am4core.useTheme(am4themes_animated);
 })
 export class SensorLuzComponent implements OnInit {
 
-  lista: [];
+  lista= [];
+  listaMaquina= [];
+  lista2= [];
   graph: [];
+  objfu= [];
   form: FormGroup;
   luzForm: FormGroup;
+  maquinaForm: FormGroup;
   submitted = false;
   newColor = false;
   status = "OFF";
@@ -37,6 +43,8 @@ export class SensorLuzComponent implements OnInit {
   button: Array<object> = [];
   MQTT: FormGroup;
   isCollapsed = false;
+  minobj;
+  minconfig;
 
   constructor(
     private luzService: LuzService,
@@ -44,6 +52,8 @@ export class SensorLuzComponent implements OnInit {
     private auth: AuthService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog, 
+    private configusService: ConfigusService,
+    private maquinaService: MaquinaService,
   ) { }
 
   ngOnInit() {
@@ -62,6 +72,11 @@ export class SensorLuzComponent implements OnInit {
       code_luz: ['', Validators.required],
     });
 
+    this.maquinaForm = this.formBuilder.group({
+      estado_maquina: ['', Validators.required],
+      id_luz: [''],
+    });
+
     this.MQTT = this.formBuilder.group({
       topic: [],
       message: [],
@@ -74,7 +89,7 @@ export class SensorLuzComponent implements OnInit {
     this.est = setInterval(() => {
       this.getLuz('');
       //this.cdRef.detectChanges();
-    }, 3000);
+    }, 6000);
   }
 
 /*   intervalTimer = interval(15000);
@@ -104,6 +119,49 @@ export class SensorLuzComponent implements OnInit {
     } catch (e) {
     }
   }
+
+  async P_ObjetosEnFuncion(estado) {
+    try {
+      let resp = await this.configusService.P_ObjetosEnFuncion(this.token).toPromise();
+      if (resp.code == 200) {
+        this.objfu = resp.response;
+        var n1 =  Number(this.objfu[0].sum_m);
+        var n2 =  Number(this.objfu[1].sum_m);
+        this. minobj = n1 + n2;
+        this.minobj= this.minobj + 1;
+        this.getConfig(estado, this.minobj)
+      }
+    } catch (e) {
+    }
+  }
+
+  async getConfig(estado, minobj) {
+    try {
+      let resp = await this.configusService.get('1', this.token).toPromise();
+      if (resp.code == 200) {
+        this.lista2 = resp.response;
+        this.minconfig = this.lista2[0].min_config;
+        if (this.lista2[0].alarma_config == 1) {
+         // console.log('alarma activa')
+
+          if (this.lista2[0].min_config < minobj) {
+           // console.log('no manda mensaje')
+            this.save(estado, this.lista2[0].vinculo_config);
+          }
+          else if (this.lista2[0].min_config == minobj) {
+            Swal.fire('Hay ' + this.lista2[0].min_config + ' objetos encendidos')
+            //console.log('manda mensaje')
+            this.save(estado, this.lista2[0].vinculo_config);
+          }
+        }
+          //console.log('se actualiza directamente')
+        //console.log(this.lista)
+        this.save(estado, this.lista2[0].vinculo_config);
+      }
+    } catch (e) {
+    }
+  }
+
   
   /*async getUsrAct() {
     try {
@@ -127,7 +185,7 @@ export class SensorLuzComponent implements OnInit {
     } else {this.status = "ON"}
     this.MQTT.value.topic = code;
     this.MQTT.value.message = this.status;
-    console.log(this.MQTT.value)
+   //console.log(this.MQTT.value)
     try {
       let resp = await this.luzService.MQTTEncoder(this.MQTT.value).toPromise();
 
@@ -135,12 +193,13 @@ export class SensorLuzComponent implements OnInit {
     }
   }
 
-  async save(estado) {
+  async save(estado, vinculo) {
     this.form.value.id_luz = estado.id_luz;
     this.form.value.nombre_luz = estado.nombre_luz;
     this.form.value.fecha_luz = estado.fecha_luz;
     this.form.value.code_luz = estado.code_luz;
-    console.log(this.form.value)
+    this.getMaquina(vinculo, estado.id_luz);
+ //   console.log(this.form.value)
     this.SendMQTT(this.form.value.estado_luz, this.form.value.code_luz);
     try {
       let response; response = await this.luzService.update(this.form.value, this.token).toPromise();
@@ -151,6 +210,78 @@ export class SensorLuzComponent implements OnInit {
     } catch (e) {
     }
   }
+
+  async getMaquina(vinculo, id) {
+    console.log(vinculo, id)
+    try {
+      let resp = await this.maquinaService.get2(id, this.token).toPromise();
+      if (resp.code == 200) {
+        this.listaMaquina = resp.response;
+        var estadoluz = this.listaMaquina[0].estado_maquina;
+        console.log(estadoluz)
+        console.log(this.form.value.estado_luz)
+        if (vinculo == 1) {
+          console.log('vinculo encendido - entra a if')
+          if (this.form.value.estado_luz == 1 && estadoluz == 1) {
+            console.log('quiere apagar foco')
+          }
+          else if (this.form.value.estado_luz == 1 && estadoluz == 0) {
+            console.log('foco apagado y pregunta para encender')
+            this.updatemaquina(id, 1)
+          }
+        }
+        else {
+           console.log('vinculo desactivado - no hace nada')
+           }
+      }
+    } catch (e) {
+    }
+  }
+
+  async updatemaquina(idluz, estado) {
+    this.maquinaForm.value.id_luz = idluz;
+    this.maquinaForm.value.estado_maquina = estado;
+    Swal.fire({
+      title: '¿Desea encender la maquina(s) vinculada(s) a este foco?', text: "",
+      type: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33', confirmButtonText: 'Si!', cancelButtonText: 'No!'
+    }).then((result) => {
+      if (result.value) {
+        let response;
+        console.log(this.maquinaForm.value)
+        response = this.maquinaService.update2(this.maquinaForm.value, this.token).toPromise();
+        if (response.code == 200) {
+          if(this.minconfig == this.minobj){
+            Swal.fire('Hay más de dos objetos encendidos!');
+          }
+          //Swal.fire('No  ha encendido el foco!');
+         // this.luzForm.reset({});
+        } else {
+          //Swal.fire('No se ha podido encender el foco!');
+        }
+      }
+    });
+  }
+
+  //Cambio color boton
+
+  toggleColor(estado) {
+    //   console.log('llega' + estado)
+       //this.newColor = !this.newColor;
+       if (estado.estado_luz == 0) {
+      //   console.log("llega como 0 y cambia a 1")
+         this.form.value.estado_luz = 1;
+       //  console.log(this.form.value)
+         this.P_ObjetosEnFuncion(estado);
+       } else if (estado.estado_luz == 1) {
+       //  console.log("llega como 1 y cambia a 0")
+         this.form.value.estado_luz = 0;
+       //  console.log(this.form.value)
+         this.save(estado, '');
+         //this.formt();
+       }
+     }
+
 
   async newLuz() {
     const dialogRef = this.dialog.open(EditluzComponent, {
@@ -166,25 +297,6 @@ export class SensorLuzComponent implements OnInit {
     dialogRef.afterClosed().subscribe(data => {
       this.getLuz('');
     });
-  }
-
-  //Cambio color boton
-
-  toggleColor(estado) {
-    console.log('llega' + estado)
-    //this.newColor = !this.newColor;
-    if (estado.estado_luz == 0) {
-      console.log("llega como 0 y cambia a 1")
-      this.form.value.estado_luz = 1;
-      console.log(this.form.value)
-      this.save(estado);
-    } else if (estado.estado_luz == 1) {
-      console.log("llega como 1 y cambia a 0")
-      this.form.value.estado_luz = 0;
-      console.log(this.form.value)
-      this.save(estado);
-      //this.formt();
-    }
   }
 
 /*
@@ -269,7 +381,7 @@ export class SensorLuzComponent implements OnInit {
     }
   
     async new() {
-      console.log(this.luzForm.value)
+    //  console.log(this.luzForm.value)
       try {
         let response = await this.luzService.create(this.luzForm.value, this.auth.token).toPromise();
         if (response.code == 200) {
