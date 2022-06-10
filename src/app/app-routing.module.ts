@@ -11,6 +11,7 @@ import { DepartamentosComponent } from './pages/filtro/departamentos/departament
 import { ProductosComponent } from './pages/filtro/productos/productos.component';
 import { SensorLuzComponent } from './pages/filtro/sensorluz/sensorluz.component';
 import { MaquinaComponent } from './pages/filtro/maquina/maquina.component';
+import { GraficaLineaComponent } from './components/grafica-linea/grafica-linea.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, 
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'product', component: ProductosComponent, canActivate: [AuthGuard] },
   { path: 'light-control', component: SensorLuzComponent, canActivate: [AuthGuard] },
   { path: 'machine-control', component: MaquinaComponent, canActivate: [AuthGuard] },
+  { path: 'graph', component: GraficaLineaComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   declarations: [],

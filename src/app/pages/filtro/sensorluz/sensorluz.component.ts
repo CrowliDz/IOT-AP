@@ -33,6 +33,7 @@ export class SensorLuzComponent implements OnInit {
   maquinaForm: FormGroup;
   submitted = false;
   newColor = false;
+  graf = false;
   status = "OFF";
   icon = "";
   token;
@@ -141,6 +142,11 @@ export class SensorLuzComponent implements OnInit {
       if (resp.code == 200) {
         this.lista2 = resp.response;
         this.minconfig = this.lista2[0].min_config;
+        if (this.lista2[0].grafica_config == 1) {
+          this.graf = true;
+        }else{
+          this.graf = false;
+        }
         if (this.lista2[0].alarma_config == 1) {
          // console.log('alarma activa')
 
@@ -178,6 +184,19 @@ export class SensorLuzComponent implements OnInit {
     } catch (e) {
     }
   }*/
+  async SendMQTTm(status, code) {
+    if (status == 0) {
+      this.status = "OFF"
+    } else { this.status = "ON" }
+    this.MQTT.value.topic = code;
+    this.MQTT.value.message = this.status;
+    //   console.log(this.MQTT.value)
+    try {
+      let resp = await this.maquinaService.MQTTEncoder(this.MQTT.value).toPromise();
+
+    } catch (e) {
+    }
+  }
 
   async SendMQTT(status, code) {
     if(status == 0){
@@ -217,6 +236,7 @@ export class SensorLuzComponent implements OnInit {
       let resp = await this.maquinaService.get2(id, this.token).toPromise();
       if (resp.code == 200) {
         this.listaMaquina = resp.response;
+        console.log(this.listaMaquina)
         var estadoluz = this.listaMaquina[0].estado_maquina;
         console.log(estadoluz)
         console.log(this.form.value.estado_luz)
@@ -227,7 +247,7 @@ export class SensorLuzComponent implements OnInit {
           }
           else if (this.form.value.estado_luz == 1 && estadoluz == 0) {
             console.log('foco apagado y pregunta para encender')
-            this.updatemaquina(id, 1)
+            this.updatemaquina(this.listaMaquina[0].codigo_maquina, id, 1)
           }
         }
         else {
@@ -238,9 +258,10 @@ export class SensorLuzComponent implements OnInit {
     }
   }
 
-  async updatemaquina(idluz, estado) {
+  async updatemaquina(codigo, idluz, estado) {
     this.maquinaForm.value.id_luz = idluz;
     this.maquinaForm.value.estado_maquina = estado;
+    console.log(this.maquinaForm.value)
     Swal.fire({
       title: '¿Desea encender la maquina(s) vinculada(s) a este foco?', text: "",
       type: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6',
@@ -249,6 +270,7 @@ export class SensorLuzComponent implements OnInit {
       if (result.value) {
         let response;
         console.log(this.maquinaForm.value)
+        this.SendMQTTm(estado, codigo)
         response = this.maquinaService.update2(this.maquinaForm.value, this.token).toPromise();
         if (response.code == 200) {
           if(this.minconfig == this.minobj){
@@ -266,19 +288,12 @@ export class SensorLuzComponent implements OnInit {
   //Cambio color boton
 
   toggleColor(estado) {
-    //   console.log('llega' + estado)
-       //this.newColor = !this.newColor;
        if (estado.estado_luz == 0) {
-      //   console.log("llega como 0 y cambia a 1")
          this.form.value.estado_luz = 1;
-       //  console.log(this.form.value)
          this.P_ObjetosEnFuncion(estado);
        } else if (estado.estado_luz == 1) {
-       //  console.log("llega como 1 y cambia a 0")
          this.form.value.estado_luz = 0;
-       //  console.log(this.form.value)
          this.save(estado, '');
-         //this.formt();
        }
      }
 

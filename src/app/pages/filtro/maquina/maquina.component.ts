@@ -178,6 +178,20 @@ export class MaquinaComponent implements OnInit {
     }
   }
 
+  async SendMQTTl(status, code) {
+    if(status == 0){
+      this.status = "OFF"
+    } else {this.status = "ON"}
+    this.MQTT.value.topic = code;
+    this.MQTT.value.message = this.status;
+   //console.log(this.MQTT.value)
+    try {
+      let resp = await this.luzService.MQTTEncoder(this.MQTT.value).toPromise();
+
+    } catch (e) {
+    }
+  }
+
   async save(estado, vinculo) {
     this.form.value.id_maquina = estado.id_maquina;
     this.form.value.nombre_maquina = estado.nombre_maquina;
@@ -210,7 +224,7 @@ export class MaquinaComponent implements OnInit {
           }
           else if (this.form.value.estado_maquina == 1 && estadoluz == 0) {
             //console.log('foco apagado y pregunta para encender')
-            this.updateluz(id, 1)
+            this.updateluz(this.listaLuz[0].code_luz, id, 1)
           }
         }
         else {
@@ -221,7 +235,7 @@ export class MaquinaComponent implements OnInit {
     }
   }
 
-  async updateluz(idluz, estado) {
+  async updateluz(codigo, idluz, estado) {
     this.luzForm.value.id_luz = idluz;
     this.luzForm.value.estado_luz = estado;
     Swal.fire({
@@ -231,6 +245,7 @@ export class MaquinaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let response;
+        this.SendMQTTl(estado, codigo);
         response = this.luzService.update(this.luzForm.value, this.token).toPromise();
         if (response.code == 200) {
           if(this.minconfig == this.minobj){

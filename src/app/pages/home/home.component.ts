@@ -13,6 +13,7 @@ import * as environment from '../../../environments/environment';
 export class HomeComponent implements OnInit {
 
   homeCards: Array<object> = [];
+  grafica: boolean;
 
   constructor(
     private router: Router,
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.homeCards = [
       {
         icon: 'wb_incandescent',

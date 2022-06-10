@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit, Input, Inject, OnDestroy } from '@angular/co
 import { AuthService } from '@app/services/auth.service';
 import { FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angular/forms';
 import { LuzService } from '@app/services/luz.service';
+import { ConfigusService } from '@app/services/configus.service';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
@@ -17,7 +18,9 @@ export class GraficaLineaComponent implements OnInit {
 
   lista: [];
   graph: [];
+  config= [];
   submitted = false;
+  graf : boolean;
   token;
   chart;
   datos;
@@ -26,6 +29,7 @@ export class GraficaLineaComponent implements OnInit {
   constructor(
     private luzService: LuzService,
     private auth: AuthService,
+    private configusService: ConfigusService,
   ) { }
 
   ngOnInit() {
@@ -42,6 +46,8 @@ export class GraficaLineaComponent implements OnInit {
   ngOnDestroy() {
    // this.unsubscribeInterval();
   }
+
+
 
   async P_EstadoYCodeX() {
     try {

@@ -17,7 +17,8 @@ export class HeaderComponent implements OnInit {
   urlImg:string;
   chartPage:number = 0;
   token;
-  lista:[];
+  lista=[];
+  gp : boolean;
 
   constructor(
     public auth: AuthService,
@@ -43,6 +44,9 @@ export class HeaderComponent implements OnInit {
       let resp = await this.configusService.read(1, this.token).toPromise();
       if (resp.code == 200) {
         this.lista = resp.response;
+        if(this.lista[0].grafica_config == 1){
+            this.gp = true;
+        }else{this.gp = false;}
       console.log(this.lista)
       }
     } catch (e) {
